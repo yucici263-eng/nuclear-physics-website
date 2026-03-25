@@ -40,7 +40,7 @@ to reach a more stable state with lower energy.
 
 <div class="image-box">
 <h3>This is the structure of an alpha particle</h3>
-<img src="images/alpha structure.webp">
+<img src="alpha structure.webp">
 </div>
 
 </div>
@@ -82,7 +82,7 @@ the large unstable nucleus, helping it reach a more stable, lower-energy state.
 <p class="score">Score: <span id="score">0</span></p>
 
 <div class="chiikawa-box">
-<img id="chiikawa" src="images/loading.gif">
+<img id="chiikawa" src="loading.gif">
 <p id="chiikawaText">Let's try the question!</p>
 </div>
 
@@ -158,13 +158,13 @@ function selectAnswer(answer) {
     score++;
     scoreText.textContent = score;
     feedback.textContent = "Correct!";
-    chiikawa.src = "images/happy.webp";
+    chiikawa.src = "happy.webp";
     chiikawaText.textContent = "Good job!! 🎉";
     goodSound.play();
     delay = 1500; // shorter delay for correct answer
   } else {
     feedback.textContent = "Not quite!";
-    chiikawa.src = "images/thinking.gif";
+    chiikawa.src = "thinking.gif";
     chiikawaText.textContent = "Oh... next time try harder!";
     sadSound.play();
     delay = 3000; // longer delay for wrong answer
@@ -176,12 +176,12 @@ function selectAnswer(answer) {
     if (currentQuestion < quizQuestions.length) {
       showQuestion();
       feedback.textContent = "";
-      chiikawa.src = "images/loading.gif";
+      chiikawa.src = "loading.gif";
       chiikawaText.textContent = "Let's try the next question!";
     } else {
       questionText.textContent = "🎉 Quiz Finished! Your final score: " + score + "/" + quizQuestions.length;
       answerButtons.innerHTML = "";
-      chiikawa.src = "images/master.webp";
+      chiikawa.src = "master.webp";
       chiikawaText.textContent = "Well done! You completed the quiz!";
       feedback.textContent = "";
     }
