@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nuclear Physics - Alpha Decay</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="title">
+<h1 class="title-text">Let's take a step into 'Nuclear Physics' !!</h1>
+</div>
+
+<div class="content">
+
+<p>In this page, we will first explore nuclear physics through one of its simplest processes: <strong>Alpha Decay</strong>.</p>
+
+<p>
+Alpha decay is an important process used to stabilise unstable radioactive isotopes 
+(radioactive isotopes are atoms of the same element but each has a different number 
+of neutrons, while having the same number of protons and electrons). 
+It works by emitting an alpha particle (which is a helium nucleus consisting 
+of 2 protons and 2 neutrons) from the nucleus.
+</p>
+
+<p>
+This process reduces the size and mass of large, unstable nuclei, allowing them 
+to reach a more stable state with lower energy.
+</p>
+
+</div>
+
+<div class="image-row">
+
+<div class="image-box">
+<h3>This is how alpha decay happens</h3>
+<img src="https://www.sciencefacts.net/wp-content/uploads/2024/08/Alpha-Decay.jpg">
+</div>
+
+<div class="image-box">
+<h3>This is the structure of an alpha particle</h3>
+<img src="images/alpha structure.webp">
+</div>
+
+</div>
+
+<p>Have a look at the images above!</p>
+
+<p>
+You should be able to see that an alpha particle, consisting of two neutrons and 
+two protons, is emitted during alpha decay. This reduces the mass and size of 
+the large unstable nucleus, helping it reach a more stable, lower-energy state.
+</p>
+
+<p><strong>Key Notes:</strong></p>
+
+<ul>
+<li>The alpha particle is the same as a helium nucleus (2 protons & 2 neutrons).</li>
+<li>It helps increase nuclear stability.</li>
+<li>It is energetically favourable because ejecting this “package” releases energy.</li>
+<li>Alpha decay usually occurs in elements with atomic number greater than 82.</li>
+</ul>
+
+<!-- QUIZ START -->
+<div class="quiz-start">
+<h2>Ready to test your knowledge?</h2>
+<p>Try the Chiikawa Nuclear Decay Quiz!</p>
+<button id="startQuiz">Start Quiz</button>
+</div>
+
+<!-- QUIZ BOX -->
+<div class="quiz-container" id="quizBox">
+<h2>Chiikawa Nuclear Decay Quiz</h2>
+
+<p id="questionNumber"></p> <!-- Question number display -->
+<p class="question" id="questionText"></p>
+
+<div class="answers" id="answerButtons"></div>
+
+<p id="feedback"></p>
+<p class="score">Score: <span id="score">0</span></p>
+
+<div class="chiikawa-box">
+<img id="chiikawa" src="images/loading.gif">
+<p id="chiikawaText">Let's try the question!</p>
+</div>
+
+</div>
+
+<!-- SOUNDS -->
+<audio id="goodSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+<audio id="sadSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+
+<script>
+// 10 questions array
+const quizQuestions = [
+  { question: "Which particle is emitted during alpha decay?", answers: ["Electron", "Helium nucleus", "Gamma ray", "Neutron"], correct: "Helium nucleus" },
+  { question: "Which particle is emitted during beta decay?", answers: ["Electron", "Helium nucleus", "Gamma ray", "Proton"], correct: "Electron" },
+  { question: "Gamma radiation is made of?", answers: ["Neutrons", "Photons", "Protons", "Electrons"], correct: "Photons" },
+  { question: "Alpha decay usually occurs in elements with atomic number greater than?", answers: ["50", "82", "20", "100"], correct: "82" },
+  { question: "What is the composition of an alpha particle?", answers: ["2 protons, 2 neutrons", "1 proton, 1 neutron", "2 electrons, 2 protons", "3 protons, 3 neutrons"], correct: "2 protons, 2 neutrons" },
+  { question: "What is the main purpose of alpha decay?", answers: ["Increase energy", "Reach nuclear stability", "Make gamma rays", "Change electrons"], correct: "Reach nuclear stability" },
+  { question: "Beta decay changes which particle in the nucleus?", answers: ["Proton to neutron", "Neutron to proton", "Electron to neutron", "Helium nucleus"], correct: "Neutron to proton" },
+  { question: "What is released in gamma decay?", answers: ["Alpha particle", "Beta particle", "High-energy photon", "Electron"], correct: "High-energy photon" },
+  { question: "Which particle reduces the mass of the nucleus?", answers: ["Electron", "Beta particle", "Alpha particle", "Neutrino"], correct: "Alpha particle" },
+  { question: "Which of these is a characteristic of radioactive isotopes?", answers: ["Stable nuclei", "Same neutrons always", "Unstable nuclei", "No decay"], correct: "Unstable nuclei" }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const startButton = document.getElementById("startQuiz");
+const quizBox = document.getElementById("quizBox");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const answerButtons = document.getElementById("answerButtons");
+const feedback = document.getElementById("feedback");
+const scoreText = document.getElementById("score");
+const chiikawa = document.getElementById("chiikawa");
+const chiikawaText = document.getElementById("chiikawaText");
+const goodSound = document.getElementById("goodSound");
+const sadSound = document.getElementById("sadSound");
+
+// Start Quiz
+startButton.onclick = () => {
+  quizBox.style.display = "block";
+  startButton.parentElement.style.display = "none";
+  showQuestion();
+};
+
+// Show current question
+function showQuestion() {
+  const current = quizQuestions[currentQuestion];
+
+  // Show question number
+  questionNumber.textContent = "Question " + (currentQuestion + 1) + " of " + quizQuestions.length;
+
+  questionText.textContent = current.question;
+  answerButtons.innerHTML = "";
+
+  current.answers.forEach(ans => {
+    const button = document.createElement("button");
+    button.classList.add("answer");
+    button.textContent = ans;
+    button.onclick = () => selectAnswer(ans);
+    answerButtons.appendChild(button);
+  });
+}
+
+// Select answer
+function selectAnswer(answer) {
+  const current = quizQuestions[currentQuestion];
+
+  let delay = 1500; // default delay for correct answer
+
+  if (answer === current.correct) {
+    score++;
+    scoreText.textContent = score;
+    feedback.textContent = "Correct!";
+    chiikawa.src = "images/happy.webp";
+    chiikawaText.textContent = "Good job!! 🎉";
+    goodSound.play();
+    delay = 1500; // shorter delay for correct answer
+  } else {
+    feedback.textContent = "Not quite!";
+    chiikawa.src = "images/thinking.gif";
+    chiikawaText.textContent = "Oh... next time try harder!";
+    sadSound.play();
+    delay = 3000; // longer delay for wrong answer
+  }
+
+  // Next question or finish after delay
+  setTimeout(() => {
+    currentQuestion++;
+    if (currentQuestion < quizQuestions.length) {
+      showQuestion();
+      feedback.textContent = "";
+      chiikawa.src = "images/loading.gif";
+      chiikawaText.textContent = "Let's try the next question!";
+    } else {
+      questionText.textContent = "🎉 Quiz Finished! Your final score: " + score + "/" + quizQuestions.length;
+      answerButtons.innerHTML = "";
+      chiikawa.src = "images/master.webp";
+      chiikawaText.textContent = "Well done! You completed the quiz!";
+      feedback.textContent = "";
+    }
+  }, delay);
+}
+
+</script>
+
+</body>
+</html>

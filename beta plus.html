@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nuclear Physics - Beta Plus Decay</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="title">
+<h1 class="title-text">Let's explore Beta Plus Decay (β⁺) !!</h1>
+</div>
+
+<div class="content">
+
+<p>In this page, we will explore <strong>Beta Plus Decay (β⁺ decay)</strong>, another important process in nuclear physics.</p>
+
+<p>
+Beta plus decay occurs when an unstable nucleus contains too many protons.
+To become more stable, a <strong>proton inside the nucleus converts into a neutron</strong>.
+During this process, a particle called a <strong>positron</strong> is emitted.
+</p>
+
+<p>
+A positron is the antimatter version of an electron. It has the same mass as an
+electron but carries a positive charge instead of a negative charge.
+</p>
+
+</div>
+
+<div class="image-row">
+
+<div class="image-box">
+<h3>This is how beta plus decay happens</h3>
+<img src="images/beta plus 1.png">
+</div>
+
+<div class="image-box">
+<h3>This is a positron (β⁺ particle)</h3>
+<img src="images/beta plus 2.jpg">
+</div>
+
+</div>
+
+<p>Have a look at the images above!</p>
+
+<p>
+During beta plus decay, the nucleus changes because a proton becomes a neutron.
+This decreases the atomic number of the element by one, helping the nucleus
+reach a more stable state.
+</p>
+
+<p><strong>Key Notes:</strong></p>
+
+<ul>
+<li>A positron is the antimatter equivalent of an electron.</li>
+<li>Beta plus decay occurs when a proton converts into a neutron.</li>
+<li>The atomic number decreases by 1.</li>
+<li>This process helps stabilise proton-rich nuclei.</li>
+</ul>
+
+
+<div class="quiz-start">
+<h2>Ready to test your knowledge?</h2>
+<p>Try the Chiikawa Nuclear Decay Quiz!</p>
+<button id="startQuiz">Start Quiz</button>
+</div>
+
+<div class="quiz-container" id="quizBox">
+<h2>Chiikawa Beta Plus Quiz</h2>
+
+<p id="questionNumber"></p>
+<p class="question" id="questionText"></p>
+
+<div class="answers" id="answerButtons"></div>
+
+<p id="feedback"></p>
+<p class="score">Score: <span id="score">0</span></p>
+
+<div class="chiikawa-box">
+<img id="chiikawa" src="images/loading.gif">
+<p id="chiikawaText">Let's try the question!</p>
+</div>
+
+</div>
+
+<audio id="goodSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+<audio id="sadSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+
+<script>
+
+const quizQuestions = [
+
+{question:"What particle is emitted during beta plus decay?",answers:["Electron","Positron","Alpha particle","Neutron"],correct:"Positron"},
+
+{question:"In beta plus decay, what does a proton change into?",answers:["Neutron","Electron","Alpha particle","Gamma ray"],correct:"Neutron"},
+
+{question:"What is a positron?",answers:["Negative electron","Positive electron","Neutron","Photon"],correct:"Positive electron"},
+
+{question:"Beta plus decay happens when the nucleus has too many?",answers:["Neutrons","Protons","Electrons","Atoms"],correct:"Protons"},
+
+{question:"What happens to the atomic number in beta plus decay?",answers:["Increases by 1","Decreases by 1","Does not change","Increases by 2"],correct:"Decreases by 1"},
+
+{question:"Beta plus decay helps the nucleus become?",answers:["Bigger","More stable","Hotter","Heavier"],correct:"More stable"},
+
+{question:"Which particle is antimatter of the electron?",answers:["Proton","Positron","Neutron","Photon"],correct:"Positron"},
+
+{question:"Beta plus decay occurs inside the?",answers:["Electron shell","Nucleus","Atom cloud","Energy field"],correct:"Nucleus"},
+
+{question:"Which particle changes into a neutron?",answers:["Electron","Proton","Photon","Alpha particle"],correct:"Proton"},
+
+{question:"Why does beta plus decay occur?",answers:["To gain electrons","To become stable","To create energy","To remove neutrons"],correct:"To become stable"}
+
+];
+
+let currentQuestion=0;
+let score=0;
+
+const startButton=document.getElementById("startQuiz");
+const quizBox=document.getElementById("quizBox");
+const questionNumber=document.getElementById("questionNumber");
+const questionText=document.getElementById("questionText");
+const answerButtons=document.getElementById("answerButtons");
+const feedback=document.getElementById("feedback");
+const scoreText=document.getElementById("score");
+const chiikawa=document.getElementById("chiikawa");
+const chiikawaText=document.getElementById("chiikawaText");
+
+startButton.onclick=()=>{
+quizBox.style.display="block";
+startButton.parentElement.style.display="none";
+showQuestion();
+};
+
+function showQuestion(){
+
+const current=quizQuestions[currentQuestion];
+
+questionNumber.textContent="Question "+(currentQuestion+1)+" of "+quizQuestions.length;
+questionText.textContent=current.question;
+answerButtons.innerHTML="";
+
+current.answers.forEach(ans=>{
+const button=document.createElement("button");
+button.classList.add("answer");
+button.textContent=ans;
+button.onclick=()=>selectAnswer(ans);
+answerButtons.appendChild(button);
+});
+
+}
+
+function selectAnswer(answer){
+
+const current=quizQuestions[currentQuestion];
+let delay=1500;
+
+if(answer===current.correct){
+
+score++;
+scoreText.textContent=score;
+feedback.textContent="Correct!";
+chiikawa.src="images/happy.webp";
+chiikawaText.textContent="Good job!!";
+
+}else{
+
+feedback.textContent="Not quite!";
+chiikawa.src="images/thinking.gif";
+chiikawaText.textContent="Oh... try again next time!";
+delay=3000;
+
+}
+
+setTimeout(()=>{
+
+currentQuestion++;
+
+if(currentQuestion<quizQuestions.length){
+
+showQuestion();
+feedback.textContent="";
+chiikawa.src="images/loading.gif";
+
+}else{
+
+questionText.textContent="Quiz finished! Score: "+score+"/"+quizQuestions.length;
+answerButtons.innerHTML="";
+chiikawa.src="images/master.webp";
+chiikawaText.textContent="Well done!";
+
+}
+
+},delay);
+
+}
+
+</script>
+
+</body>
+</html>

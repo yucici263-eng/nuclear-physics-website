@@ -1,0 +1,114 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+.searchpage {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+  background-image: url("images/bluesky.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 30px;
+}
+
+
+.cloud-rect {
+  background-color: #f1eee2;
+  width: 520px;
+  max-width: 95%;
+  padding: 40px 30px 20px 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.cloud-title {
+  font-family: monospace;
+  font-size: 28px;
+  color: rgb(55, 92, 130);
+  text-align: center;
+}
+
+
+.search-bar {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: 2px solid #aaa;
+  width: 360px;
+  font-size: 18px;
+}
+
+
+.cloud-subtitle {
+  font-size: 18px;
+  color: rgb(55, 92, 130);
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.left-animation {
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.left-animation img {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+
+
+.top-left {
+  position: fixed;   
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column; 
+  gap: 1px;             
+  z-index: 1000;        
+}
+
+
+.top-left img:first-child {
+  width: 100px;    
+  height: auto;    
+}
+
+
+.top-left img:last-child {
+  width: 250px;    
+  height: auto;    
+}

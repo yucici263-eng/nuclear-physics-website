@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nuclear Physics - Gamma Decay</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="title">
+<h1 class="title-text">Let's explore Gamma Decay !!</h1>
+</div>
+
+<div class="content">
+
+<p>In this page, we will explore another nuclear process called <strong>Gamma Decay</strong>.</p>
+
+<p>
+Gamma decay occurs when an unstable nucleus has excess energy.
+Instead of releasing particles like alpha or beta decay, the nucleus
+releases this extra energy in the form of <strong>gamma radiation</strong>.
+</p>
+
+<p>
+Gamma radiation is a type of high-energy electromagnetic wave.
+This radiation allows the nucleus to move from a high-energy
+state to a lower-energy and more stable state.
+</p>
+
+</div>
+
+<div class="image-row">
+
+<div class="image-box">
+<h3>This is how gamma decay happens</h3>
+<img src="images/gamma22.jpg">
+</div>
+
+<div class="image-box">
+<h3>concise explanation</h3>
+<img src="images/gamma11.webp">
+</div>
+
+</div>
+
+<p>Have a look at the images above!</p>
+
+<p>
+You should notice that during gamma decay, no particles are lost from the
+nucleus. Instead, the nucleus simply releases energy as gamma radiation.
+This means the number of protons and neutrons stays the same.
+</p>
+
+<p><strong>Key Notes:</strong></p>
+
+<ul>
+<li>Gamma radiation is a high-energy electromagnetic wave.</li>
+<li>No particles are emitted during gamma decay.</li>
+<li>The atomic number and mass number stay the same.</li>
+<li>Gamma radiation is very penetrating and requires thick lead or concrete to stop it.</li>
+</ul>
+
+
+<div class="quiz-start">
+
+<h2>Ready to test your knowledge?</h2>
+<p>Try the Chiikawa Nuclear Decay Quiz!</p>
+
+<button id="startQuiz">Start Quiz</button>
+
+</div>
+
+
+<div class="quiz-container" id="quizBox">
+
+<h2>Chiikawa Gamma Decay Quiz</h2>
+
+<p id="questionNumber"></p>
+
+<p class="question" id="questionText"></p>
+
+<div class="answers" id="answerButtons"></div>
+
+<p id="feedback"></p>
+
+<p class="score">Score: <span id="score">0</span></p>
+
+<div class="chiikawa-box">
+
+<img id="chiikawa" src="images/loading.gif">
+
+<p id="chiikawaText">Let's try the question!</p>
+
+</div>
+
+</div>
+
+
+<audio id="goodSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+<audio id="sadSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+
+<script>
+
+const quizQuestions = [
+
+{
+question:"What is emitted during gamma decay?",
+answers:["Alpha particle","Electron","Energy as gamma radiation","Neutron"],
+correct:"Energy as gamma radiation"
+},
+
+{
+question:"Gamma radiation is a type of what?",
+answers:["Electromagnetic wave","Solid particle","Gas","Liquid"],
+correct:"Electromagnetic wave"
+},
+
+{
+question:"During gamma decay, what happens to the atomic number?",
+answers:["Increases","Decreases","Stays the same","Doubles"],
+correct:"Stays the same"
+},
+
+{
+question:"During gamma decay, what happens to the mass number?",
+answers:["Increases","Decreases","Stays the same","Disappears"],
+correct:"Stays the same"
+},
+
+{
+question:"Gamma decay happens because the nucleus has too much?",
+answers:["Energy","Electrons","Mass","Atoms"],
+correct:"Energy"
+},
+
+{
+question:"Gamma radiation is best described as?",
+answers:["High-energy light","Heavy particle","Liquid particle","Gas"],
+correct:"High-energy light"
+},
+
+{
+question:"Which type of radiation is the most penetrating?",
+answers:["Alpha","Beta","Gamma","Neutron"],
+correct:"Gamma"
+},
+
+{
+question:"What material is commonly used to stop gamma radiation?",
+answers:["Paper","Plastic","Lead","Glass"],
+correct:"Lead"
+},
+
+{
+question:"Gamma decay usually happens after which other decays?",
+answers:["Alpha or beta decay","Chemical reactions","Combustion","Fusion"],
+correct:"Alpha or beta decay"
+},
+
+{
+question:"Why does gamma decay occur?",
+answers:["To remove protons","To release extra energy","To remove electrons","To increase mass"],
+correct:"To release extra energy"
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const startButton = document.getElementById("startQuiz");
+const quizBox = document.getElementById("quizBox");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const answerButtons = document.getElementById("answerButtons");
+const feedback = document.getElementById("feedback");
+const scoreText = document.getElementById("score");
+
+const chiikawa = document.getElementById("chiikawa");
+const chiikawaText = document.getElementById("chiikawaText");
+
+startButton.onclick = () => {
+
+quizBox.style.display = "block";
+startButton.parentElement.style.display = "none";
+
+showQuestion();
+
+};
+
+function showQuestion(){
+
+const current = quizQuestions[currentQuestion];
+
+questionNumber.textContent =
+"Question " + (currentQuestion + 1) + " of " + quizQuestions.length;
+
+questionText.textContent = current.question;
+
+answerButtons.innerHTML = "";
+
+current.answers.forEach(ans => {
+
+const button = document.createElement("button");
+
+button.classList.add("answer");
+
+button.textContent = ans;
+
+button.onclick = () => selectAnswer(ans);
+
+answerButtons.appendChild(button);
+
+});
+
+}
+
+function selectAnswer(answer){
+
+const current = quizQuestions[currentQuestion];
+
+let delay = 1500;
+
+if(answer === current.correct){
+
+score++;
+
+scoreText.textContent = score;
+
+feedback.textContent = "Correct!";
+
+chiikawa.src = "images/happy.webp";
+
+chiikawaText.textContent = "Good job!!";
+
+document.getElementById("goodSound").play();
+
+}
+
+else{
+
+feedback.textContent = "Not quite!";
+
+chiikawa.src = "images/sad.webp";
+
+chiikawaText.textContent = "Oh... next time try harder!";
+
+document.getElementById("sadSound").play();
+
+delay = 3000;
+
+}
+
+setTimeout(()=>{
+
+currentQuestion++;
+
+if(currentQuestion < quizQuestions.length){
+
+showQuestion();
+
+feedback.textContent="";
+
+chiikawa.src="images/loading.gif";
+
+}
+
+else{
+
+questionText.textContent =
+"Quiz finished! Score: " + score + " / " + quizQuestions.length;
+
+answerButtons.innerHTML="";
+
+chiikawa.src="images/happy.webp";
+
+chiikawaText.textContent="You finished the quiz!";
+
+}
+
+}, delay);
+
+}
+
+</script>
+
+</body>
+</html>
