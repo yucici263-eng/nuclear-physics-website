@@ -33,12 +33,12 @@ electron but carries a positive charge instead of a negative charge.
 
 <div class="image-box">
 <h3>This is how beta plus decay happens</h3>
-<img src="images/beta plus 1.png">
+<img src="beta plus 1.png">
 </div>
 
 <div class="image-box">
 <h3>This is a positron (β⁺ particle)</h3>
-<img src="images/beta plus 2.jpg">
+<img src="beta plus 2.jpg">
 </div>
 
 </div>
@@ -79,7 +79,7 @@ reach a more stable state.
 <p class="score">Score: <span id="score">0</span></p>
 
 <div class="chiikawa-box">
-<img id="chiikawa" src="images/loading.gif">
+<img id="chiikawa" src="loading.gif">
 <p id="chiikawaText">Let's try the question!</p>
 </div>
 
@@ -161,13 +161,13 @@ if(answer===current.correct){
 score++;
 scoreText.textContent=score;
 feedback.textContent="Correct!";
-chiikawa.src="images/happy.webp";
+chiikawa.src="happy.webp";
 chiikawaText.textContent="Good job!!";
 
 }else{
 
 feedback.textContent="Not quite!";
-chiikawa.src="images/thinking.gif";
+chiikawa.src="thinking.gif";
 chiikawaText.textContent="Oh... try again next time!";
 delay=3000;
 
@@ -181,13 +181,13 @@ if(currentQuestion<quizQuestions.length){
 
 showQuestion();
 feedback.textContent="";
-chiikawa.src="images/loading.gif";
+chiikawa.src="loading.gif";
 
 }else{
 
 questionText.textContent="Quiz finished! Score: "+score+"/"+quizQuestions.length;
 answerButtons.innerHTML="";
-chiikawa.src="images/master.webp";
+chiikawa.src="master.webp";
 chiikawaText.textContent="Well done!";
 
 }
