@@ -59,3 +59,143 @@ helping the nucleus move toward stability.
 <li>The atomic number increases by 1.</li>
 <li>Beta radiation can travel further than alpha radiation.</li>
 </ul>
+
+<div class="quiz-start">
+<h2>Ready to test your knowledge?</h2>
+<p>Try the Chiikawa Nuclear Decay Quiz!</p>
+<button id="startQuiz">Start Quiz</button>
+</div>
+
+<div class="quiz-container" id="quizBox">
+<h2>Chiikawa Beta Minus Quiz</h2>
+
+<p id="questionNumber"></p>
+<p class="question" id="questionText"></p>
+
+<div class="answers" id="answerButtons"></div>
+
+<p id="feedback"></p>
+<p class="score">Score: <span id="score">0</span></p>
+
+<div class="chiikawa-box">
+<img id="chiikawa" src="loading.gif">
+<p id="chiikawaText">Let's try the question!</p>
+</div>
+
+</div>
+
+<audio id="goodSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+<audio id="sadSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+
+<script>
+
+const quizQuestions = [
+
+{question:"What particle is emitted during beta minus decay?",answers:["Electron","Positron","Alpha particle","Neutron"],correct:"Electron"},
+
+{question:"In beta minus decay, what does a neutron change into?",answers:["Proton","Electron","Alpha particle","Gamma ray"],correct:"Proton"},
+
+{question:"What is a beta minus particle?",answers:["Positive electron","Negative electron","Neutron","Photon"],correct:"Negative electron"},
+
+{question:"Beta minus decay happens when the nucleus has too many?",answers:["Protons","Neutrons","Electrons","Atoms"],correct:"Neutrons"},
+
+{question:"What happens to the atomic number in beta minus decay?",answers:["Increases by 1","Decreases by 1","Does not change","Increases by 2"],correct:"Increases by 1"},
+
+{question:"What happens to the mass number during beta minus decay?",answers:["Increases","Decreases","Stays the same","Doubles"],correct:"Stays the same"},
+
+{question:"Which equation represents beta minus decay?",answers:["p → n + e⁺","n → p + e⁻","p → n + α","n → p + γ"],correct:"n → p + e⁻"},
+
+{question:"Why does beta minus decay occur?",answers:["To lose electrons","To become more stable","To increase charge","To remove protons"],correct:"To become more stable"},
+
+{question:"Where does beta minus decay occur?",answers:["Electron shell","Nucleus","Outside atom","Energy field"],correct:"Nucleus"},
+
+{question:"What happens to the number of protons after beta minus decay?",answers:["Increases","Decreases","Stays the same","Doubles"],correct:"Increases"}
+
+];
+
+let currentQuestion=0;
+let score=0;
+
+const startButton=document.getElementById("startQuiz");
+const quizBox=document.getElementById("quizBox");
+const questionNumber=document.getElementById("questionNumber");
+const questionText=document.getElementById("questionText");
+const answerButtons=document.getElementById("answerButtons");
+const feedback=document.getElementById("feedback");
+const scoreText=document.getElementById("score");
+const chiikawa=document.getElementById("chiikawa");
+const chiikawaText=document.getElementById("chiikawaText");
+
+startButton.onclick=()=>{
+quizBox.style.display="block";
+startButton.parentElement.style.display="none";
+showQuestion();
+};
+
+function showQuestion(){
+
+const current=quizQuestions[currentQuestion];
+
+questionNumber.textContent="Question "+(currentQuestion+1)+" of "+quizQuestions.length;
+questionText.textContent=current.question;
+answerButtons.innerHTML="";
+
+current.answers.forEach(ans=>{
+const button=document.createElement("button");
+button.classList.add("answer");
+button.textContent=ans;
+button.onclick=()=>selectAnswer(ans);
+answerButtons.appendChild(button);
+});
+
+}
+
+function selectAnswer(answer){
+
+const current=quizQuestions[currentQuestion];
+let delay=1500;
+
+if(answer===current.correct){
+
+score++;
+scoreText.textContent=score;
+feedback.textContent="Correct!";
+chiikawa.src="images/happy.webp";
+chiikawaText.textContent="Good job!!";
+
+}else{
+
+feedback.textContent="Not quite!";
+chiikawa.src="thinking.gif";
+chiikawaText.textContent="Oh... try again next time!";
+delay=3000;
+
+}
+
+setTimeout(()=>{
+
+currentQuestion++;
+
+if(currentQuestion<quizQuestions.length){
+
+showQuestion();
+feedback.textContent="";
+chiikawa.src="loading.gif";
+
+}else{
+
+questionText.textContent="Quiz finished! Score: "+score+"/"+quizQuestions.length;
+answerButtons.innerHTML="";
+chiikawa.src="master.webp";
+chiikawaText.textContent="Well done!";
+
+}
+
+},delay);
+
+}
+
+</script>
+
+</body>
+</html>
